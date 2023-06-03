@@ -1,0 +1,84 @@
+{% extends 'root/base_html_5.html' %}
+{% load static %}
+{% block title %}
+    Teasing
+{% endblock title %}
+{% block hrefCss %} {% static 'teasingApp/css/teasing_style.css' %}{% endblock hrefCss %}
+{% block body %}
+
+
+<div class="container">
+    <h1>Teasing Game</h1>
+    {% include 'teasingApp/board.html' %}
+    <div class="controls">
+        <input type="number" id="shuffle-number" min="1" required>
+        <button class="btn-shuffle">Shuffle</button>
+        <button class="btn-solve">Solve</button>
+    </div>
+
+</div>
+
+
+
+<script>
+    document.querySelector(".btn-shuffle").addEventListener("click", function() {
+        var shuffleNumber = document.getElementById("shuffle-number").value;
+        console.log(document.getElementById("board"))
+        if (shuffleNumber.trim() !== "") {
+            var url = "{% url 'shuffle' 0 %}".replace('0', shuffleNumber);
+            var xhr = new XMLHttpRequest();
+            xhr.open("GET", url, true);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    var boardDiv = document.getElementById("board");
+                    boardDiv.innerHTML = response.html;  
+                } else {
+                        console.log("Erreur lors du mélange");
+                    }
+                }
+            };
+            xhr.send();
+        } else {
+        }
+    });
+
+    document.querySelector(".btn-solve").addEventListener("click", function() {
+        var url = "{% url 'solve' %}";
+        var xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var response = JSON.parse(xhr.responseText);
+                if (response.success) {
+                    var boardDiv = document.getElementById("board");
+                    var boardArray = response.boardArray;
+
+                    var currentIndex = 0;
+                    console.log(boardArray)
+                    var intervalId = setInterval(function() {
+                        if (currentIndex >= boardArray.length) {
+                            clearInterval(intervalId); // Arrêter la boucle lorsque toutes les étapes ont été affichées
+                            return;
+                        }
+                        
+                        boardDiv.innerHTML = boardArray[currentIndex];
+                        currentIndex++;
+                    }, 500); // Mettre à jour toutes les 1 seconde
+                } else {
+                    console.log("Erreur lors de la résolution");
+                }
+            }
+        };
+        xhr.send();
+    });
+            
+</script>
+
+
+
+    
+{% endblock body %}

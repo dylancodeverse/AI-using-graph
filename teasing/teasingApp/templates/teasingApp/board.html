@@ -1,0 +1,14 @@
+<div class="board" id="board">
+    {% for lines in matrix %}
+        <div class="line">
+            {% for cols in lines %}
+                {% if cols != 0 %}
+                <div class="tile">{{cols}}</div>
+                {% endif %}
+                {% if cols == 0 %}
+                    <div class="empty-tile"> </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %} 
+</div>
