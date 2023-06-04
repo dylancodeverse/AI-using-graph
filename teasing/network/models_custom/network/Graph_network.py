@@ -1,5 +1,5 @@
-from teasing.teasingApp.models_custom.teasingApp.Graph_AL import Graph_AL
-from teasing.teasingApp.models_custom.teasingApp.Graph_access_file import graph_access_file
+from teasingApp.models_custom.teasingApp.Graph_AL import Graph_AL
+from teasingApp.models_custom.teasingApp.Graph_access_file import graph_access_file
 
 class Graph_network(Graph_AL):
     def __init__(self, source: str ,site:str) -> None:
