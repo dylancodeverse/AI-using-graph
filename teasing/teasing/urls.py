@@ -17,11 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from teasingApp import views as teasing
 from django.urls import path
+from network import views as network
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('' ,teasing.initialize),
     path('index/' ,teasing.index ,name='index'),
     path('shuffle/<int:shuffle_number>/', teasing.shuffle, name='shuffle'),
-    path('solve',teasing.solve ,name='solve')
+    path('solve',teasing.solve ,name='solve') ,
+    path('network/',network.index)
 ]

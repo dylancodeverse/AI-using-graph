@@ -75,7 +75,7 @@ class Teasing:
         ls: list[Teasing] = []
         ls.append(self)
         for move in move_list:
-            x = copy.deepcopy(ls[-1])  # Crée une copie indépendante du dernier élément de la liste
+            x = copy.deepcopy(ls[-1])  
             x.move_empty(move)
             ls.append(x)
         return ls
