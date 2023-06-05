@@ -37,7 +37,7 @@ class Graph_AL:
         visited = set()
         all_paths = {node: [[], 0] for node in self.adjancy_list}  # Utiliser une liste au lieu d'un tuple
         while visited != set(self.adjancy_list):
-            current_node = min(distance, key=distance.get)
+            current_node = min(distance, key=distance.get) # type: ignore
             visited.add(current_node)
             for neighbor, weight in self.adjancy_list[current_node]:
                 if neighbor not in visited:
@@ -47,7 +47,7 @@ class Graph_AL:
                         distance[neighbor] = new_distance
                         all_paths[neighbor][1] = new_distance
             del distance[current_node]
-        return all_paths
+        return all_paths # type: ignore
     
     def get_shortest_path(self ,start:str ,end:str):
         return self.dijkstra(start)[end]

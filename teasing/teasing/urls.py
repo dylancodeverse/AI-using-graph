@@ -26,8 +26,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('' ,teasing.initialize),
     path('index/' ,teasing.index ,name='index'),
-    path('shuffle/<int:shuffle_number>/', teasing.shuffle, name='shuffle'),
-    path('solve',teasing.solve ,name='solve') ,
+    path('shuffle/<int:shuffle_number>/', teasing.shuffle, name='shuffle'), # type: ignore
+    path('solve',teasing.solve ,name='solve') , # type: ignore
     path('network/',network.index) ,
     path('initialize_graph/' ,network.initialize_graph ,name='initialize_graph')
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

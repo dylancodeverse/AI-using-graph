@@ -43,7 +43,7 @@ def solve(request):
     if current is not None:
         graph_teasing = Graph_Teasing(current)
         all_moves= graph_teasing.solve_taquin(goal_teasing)
-        schema_moves = current.get_list_of_result_move(all_moves)
+        schema_moves = current.get_list_of_result_move((all_moves)) # type: ignore
         board_to_render=[]
         for schema in schema_moves :
             html = render_to_string('teasingApp/board.html', {'matrix': schema.matrix})

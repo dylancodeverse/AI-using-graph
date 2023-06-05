@@ -9,7 +9,7 @@ from teasingApp.models_custom.teasingApp.Teasing import Teasing
 
 class Graph_Teasing(Graph_AL):
     def __init__(self, taquin: Teasing, source=None) -> None:
-        super().__init__(source)
+        super().__init__(source) # type: ignore
         self.adjancy_list = {taquin: []}
         derivates = taquin.get_tuples_derivate()
         for derivate in derivates:
@@ -24,7 +24,7 @@ class Graph_Teasing(Graph_AL):
             result += "\n"
         return result
     
-    def solve_taquin(self, goal):
+    def solve_taquin(self, goal): 
         first_key = list(self.adjancy_list.keys())[0]
         return self.shortest_path(first_key, goal)
     

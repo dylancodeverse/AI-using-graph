@@ -1,5 +1,12 @@
+import os
+from django.conf import settings
 from teasingApp.models_custom.teasingApp.Graph_AL import Graph_AL
 from teasingApp.models_custom.teasingApp.Graph_access_file import graph_access_file
+import networkx as nx
+import matplotlib.pyplot as plt
+import urllib
+import base64
+import io 
 
 class Graph_network(Graph_AL):
     def __init__(self, source: str ,site:str) -> None:
@@ -53,3 +60,33 @@ class Graph_network(Graph_AL):
                break
             i+=1
         self.modified= True
+
+    def prepare_image(self):
+        # Génération du graphique orienté
+        G = nx.DiGraph()
+        
+        for node, edges in self.adjancy_list.items():
+            for edge in edges:
+                target_node, weight = edge
+                G.add_edge(node, target_node, weight=float(weight))
+
+        # Dessin du graphique
+        pos = nx.spring_layout(G)  # type: ignore # Layout du graphique
+        
+        # Dessin des arêtes avec flèches pour représenter les sens
+        nx.draw_networkx_edges(G, pos, arrows=True, arrowstyle='->', arrowsize=10, edge_color='gray') # type: ignore
+
+        # Dessin des nœuds et des libellés
+        nx.draw_networkx_nodes(G, pos, node_color='lightblue', node_size=500) # type: ignore
+        nx.draw_networkx_labels(G, pos, font_size=10) # type: ignore
+
+        # Affichage des poids des arêtes
+        edge_labels = nx.get_edge_attributes(G, 'weight') # type: ignore
+        nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels) # type: ignore
+
+        # Enregistrer le graphique sous forme d'image PNG dans le dossier media
+        image_path = os.path.join(settings.MEDIA_ROOT, 'graph.png')
+
+        plt.savefig(os.path.join(BASE_DIR, 'static', 'graph.png'), format='png')
+        
+        return image_path
