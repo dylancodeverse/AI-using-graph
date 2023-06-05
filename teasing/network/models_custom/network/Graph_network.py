@@ -29,13 +29,14 @@ class Graph_network(Graph_AL):
         return False   
 
     def get_path(self ,key ,site):
+        if self.list_paths is not None:
         #key na hoe ilay depart anle serveur 
-        self.init_dijkstra()
-        possible_paths = self.list_paths[key]
-        all_keys = possible_paths.keys()
-        for one in all_keys :
-            if self.contains_site(one,site) is True :
-                return possible_paths[one] 
+            self.init_dijkstra()
+            possible_paths = self.list_paths[key]
+            all_keys = possible_paths.keys()
+            for one in all_keys :
+                if self.contains_site(one,site) is True :
+                    return possible_paths[one] 
         return None
 
     def cut_path(self , node1 ,node2 ,both_ways:bool):
@@ -46,7 +47,7 @@ class Graph_network(Graph_AL):
                    self.adjancy_list[node2].pop(i) 
                    break
                 i+=1
-            i=0
+        i=0
         for in_list in self.adjancy_list[node1]:
             if in_list[0] == node2:
                self.adjancy_list[node1].pop(i) 
