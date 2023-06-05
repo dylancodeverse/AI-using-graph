@@ -30,4 +30,6 @@ urlpatterns = [
     path('solve',teasing.solve ,name='solve') , # type: ignore
     path('network/',network.index) ,
     path('initialize_graph/' ,network.initialize_graph ,name='initialize_graph')
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -26,10 +26,8 @@ def initialize_graph(request):
             print("---------------------------------")
             print(image_path)
             # Obtenir le chemin relatif de l'image par rapport à la racine du dossier media
-
-
             # Renvoyer le chemin relatif pour l'affichage dans le template
-            return render(request, 'network/success.html')
+            return render(request, 'network/success.html' ,context={'link':image_path})
 
     return render(request, 'your_template.html')
 
