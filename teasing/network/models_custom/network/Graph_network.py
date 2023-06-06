@@ -21,7 +21,7 @@ class Graph_network(Graph_AL):
         # ilay source eto efa ilay ip no node
         super().__init__(source)
         self.modified =True
-        self.list_paths =None
+        self.list_paths ={}
         self.site_list = {}
         self.init_site(site)
         self.init_dijkstra()
