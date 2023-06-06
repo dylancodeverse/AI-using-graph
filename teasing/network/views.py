@@ -7,7 +7,7 @@ from .models_custom.network.Graph_network import Graph_network
 def index(request):
     return render(request ,'network/network.html')
 
-@never_cache
+
 def initialize_graph(request):
     if request.method == 'POST':
         graph_file = request.FILES.get('graph-file')
