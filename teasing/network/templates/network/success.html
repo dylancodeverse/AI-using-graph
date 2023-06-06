@@ -8,7 +8,29 @@
 
 <h1>Network</h1>
 
-<img src="{{ MEDIA_URL }}graph.png" alt="Description de l'image">
+<form action="{% url 'request_domain' %}" method="POST">
+  {% csrf_token %}
+  <label for="domain-input">Domain:</label>
+  <input type="text" id="domain-input" name="domain">
+  <label for="ip-input">IP:</label>
+  <input type="text" id="ip-input" name="ip">
+  <button type="submit">Submit (Request Domain)</button>
+</form>
 
+<form action="{% url 'cut_path' %}" method="POST">
+  {% csrf_token %}
+  <label for="node1-input">Node 1:</label>
+  <input type="text" id="node1-input" name="node1">
+  <label for="node2-input">Node 2:</label>
+  <input type="text" id="node2-input" name="node2">
+  <label for="select-input">Select:</label>
+  <select id="select-input" name="select">
+    <option value="true">True</option>
+    <option value="false">False</option>
+  </select>
+  <button type="submit">Submit (Cut Path)</button>
+</form>
+
+<img src="{% static link %}" alt="Description de l'image">
 
 {% endblock body %}

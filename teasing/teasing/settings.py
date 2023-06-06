@@ -134,7 +134,14 @@ UPLOADS_DIR = BASE_DIR / 'uploads'
 
 
 # Spécifiez l'emplacement des fichiers téléchargés
-MEDIA_ROOT = UPLOADS_DIR
+MEDIA_ROOT = os.path.join(BASE_DIR, 'uploads')
+
 
 # URL de base pour les fichiers téléchargés
 MEDIA_URL = '/media/'
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+STATICFILES_DIRS = [
+    '/home/dylan/Desktop/Mr_Tsinjo/Python/web-app/graph-app/teasing/network/static/',
+]

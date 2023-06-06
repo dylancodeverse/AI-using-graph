@@ -29,7 +29,11 @@ urlpatterns = [
     path('shuffle/<int:shuffle_number>/', teasing.shuffle, name='shuffle'), # type: ignore
     path('solve',teasing.solve ,name='solve') , # type: ignore
     path('network/',network.index) ,
-    path('initialize_graph/' ,network.initialize_graph ,name='initialize_graph')
+    path('initialize_graph/' ,network.initialize_graph ,name='initialize_graph') ,
+    path('request_domain/',network.request_domain , name='request_domain') ,# type: ignore ,
+    path('result_search/' ,network.request_domain ,name='result_search') ,
+    path('cut_path/' ,network.cut_path ,name='cut_path')
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,17 @@
+{% extends 'root/base_html_5.html' %}
+{% load static %}
+
+{% block title %}NetWork's graph{% endblock title %}
+{% block hrefCss %} {% static 'network/style.css' %} {% endblock hrefCss %}
+
+{% block body %}
+
+<h1>Network</h1>
+
+{% with ips=response.0 %}
+  <p>Les IP qu'il faut passer sont : {% for ip in ips %}{{ ip }}{% if not forloop.last %}, {% endif %}{% endfor %}</p>
+{% endwith %}
+
+<p>Le poids du parcours : {{ response.1 }}</p>
+
+{% endblock body %}
